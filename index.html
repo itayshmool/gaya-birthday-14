@@ -605,13 +605,18 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Nav show/hide on scroll past hero
+// Nav show/hide — appear after scrolling 80px
 const nav = document.getElementById('nav');
-const hero = document.querySelector('.hero');
-const heroObserver = new IntersectionObserver(entries => {
-    nav.classList.toggle('visible', !entries[0].isIntersecting);
-}, { threshold: 0.1 });
-heroObserver.observe(hero);
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 80) {
+        nav.classList.add('visible');
+    } else {
+        nav.classList.remove('visible');
+    }
+    lastScroll = y;
+}, { passive: true });
 
 // Active nav link tracking
 const sections = document.querySelectorAll('[id^="ch"], #video, #gallery');
