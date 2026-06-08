@@ -173,6 +173,64 @@
         .lightbox.active { display: flex; }
         .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 8px; border: 4px solid var(--parchment-darker); box-shadow: 0 20px 80px rgba(0,0,0,0.5); }
 
+        /* ── NAV ── */
+        .nav {
+            position: fixed; top: 0; right: 0; left: 0; z-index: 900;
+            background: rgba(245,240,232,0.92); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gold);
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+        }
+        .nav.visible { transform: translateY(0); }
+        .nav-inner {
+            max-width: 900px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 20px; height: 52px;
+        }
+        .nav-logo { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 1.6rem; color: var(--burgundy); text-decoration: none; }
+        .nav-links { display: flex; gap: 4px; list-style: none; }
+        .nav-links a {
+            font-size: 0.78rem; font-weight: 500; color: var(--ink-light);
+            text-decoration: none; padding: 6px 10px; border-radius: 4px;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+        .nav-links a:hover, .nav-links a.active { background: var(--gold); color: white; }
+
+        .hamburger {
+            display: none; background: none; border: none; cursor: pointer;
+            width: 32px; height: 32px; position: relative; z-index: 910;
+        }
+        .hamburger span {
+            display: block; width: 22px; height: 2px; background: var(--ink);
+            position: absolute; right: 5px; transition: all 0.3s ease;
+        }
+        .hamburger span:nth-child(1) { top: 9px; }
+        .hamburger span:nth-child(2) { top: 15px; }
+        .hamburger span:nth-child(3) { top: 21px; }
+        .hamburger.open span:nth-child(1) { top: 15px; transform: rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { top: 15px; transform: rotate(-45deg); }
+
+        .mobile-menu {
+            display: none; position: fixed; inset: 0; z-index: 899;
+            background: rgba(245,240,232,0.97); backdrop-filter: blur(16px);
+            flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            font-family: 'Amatic SC', cursive; font-weight: 700;
+            font-size: 1.8rem; color: var(--ink); text-decoration: none;
+            padding: 8px 24px; border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .mobile-menu a:hover { background: var(--gold); color: white; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+        }
+
         /* ── ANIMATIONS ── */
         .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -190,8 +248,42 @@
 </head>
 <body>
 
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#hero" class="nav-logo">הסיפור של גאיה</a>
+        <ul class="nav-links">
+            <li><a href="#ch1">הלידה</a></li>
+            <li><a href="#ch2">הים</a></li>
+            <li><a href="#ch3">חלומות</a></li>
+            <li><a href="#ch4">משפחה</a></li>
+            <li><a href="#ch5">תאילנד</a></li>
+            <li><a href="#ch6">גדלה</a></li>
+            <li><a href="#ch7">אבא</a></li>
+            <li><a href="#ch8">נערה</a></li>
+            <li><a href="#video">הסרט</a></li>
+            <li><a href="#gallery">תמונות</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="תפריט">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+    <a href="#ch1">פרק א׳ — הלידה</a>
+    <a href="#ch2">פרק ב׳ — הים</a>
+    <a href="#ch3">פרק ג׳ — חלומות</a>
+    <a href="#ch4">פרק ד׳ — משפחה</a>
+    <a href="#ch5">פרק ה׳ — תאילנד</a>
+    <a href="#ch6">פרק ו׳ — גדלה</a>
+    <a href="#ch7">פרק ז׳ — אבא</a>
+    <a href="#ch8">פרק ח׳ — נערה</a>
+    <a href="#video">הסרט</a>
+    <a href="#gallery">התמונות האמיתיות</a>
+</div>
+
 <!-- ═══ HERO ═══ -->
-<section class="hero">
+<section class="hero" id="hero">
     <div class="book-cover fade-in">
         <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
         <div class="corner corner-bl"></div><div class="corner corner-br"></div>
@@ -206,6 +298,7 @@
 </section>
 
 <!-- ═══ CHAPTER 1: NEWBORN ═══ -->
+<div id="ch1"></div>
 <div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
     <div class="ch-header">
         <div class="ch-num">&mdash; פרק א׳ &mdash;</div>
@@ -222,6 +315,7 @@
 <div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
 <!-- ═══ CHAPTER 2: BEACH BABY ═══ -->
+<div id="ch2"></div>
 <div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
     <div class="ch-header">
         <div class="ch-num">&mdash; פרק ב׳ &mdash;</div>
@@ -241,6 +335,7 @@
 <div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
 <!-- ═══ CHAPTER 3: DREAMING ═══ -->
+<div id="ch3"></div>
 <div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
     <div class="ch-header">
         <div class="ch-num">&mdash; פרק ג׳ &mdash;</div>
@@ -257,6 +352,7 @@
 <div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
 <!-- ═══ CHAPTER 4: FAMILY ═══ -->
+<div id="ch4"></div>
 <div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
     <div class="ch-header">
         <div class="ch-num">&mdash; פרק ד׳ &mdash;</div>
@@ -281,6 +377,7 @@
 <div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
 <!-- ═══ CHAPTER 5: THAILAND ═══ -->
+<div id="ch5"></div>
 <div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
     <div class="ch-header">
         <div class="ch-num">&mdash; פרק ה׳ &mdash;</div>
@@ -306,6 +403,7 @@
 <div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
 <!-- ═══ CHAPTER 6: GROWING ═══ -->
+<div id="ch6"></div>
 <div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
     <div class="ch-header">
         <div class="ch-num">&mdash; פרק ו׳ &mdash;</div>
@@ -329,6 +427,7 @@
 <div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
 <!-- ═══ CHAPTER 7: DAD MOMENTS ═══ -->
+<div id="ch7"></div>
 <div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
     <div class="ch-header">
         <div class="ch-num">&mdash; פרק ז׳ &mdash;</div>
@@ -348,6 +447,7 @@
 <div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
 <!-- ═══ CHAPTER 8: YOUNG LADY ═══ -->
+<div id="ch8"></div>
 <div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
     <div class="ch-header">
         <div class="ch-num">&mdash; פרק ח׳ &mdash;</div>
@@ -371,6 +471,7 @@
 <div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
 <!-- ═══ VIDEO CHAPTER ═══ -->
+<div id="video"></div>
 <section class="video-ch">
     <div class="ch-frame fade-in" style="max-width:800px;margin:0 auto">
         <div class="ch-header">
@@ -387,6 +488,7 @@
 <div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
 
 <!-- ═══ REAL PHOTOS GALLERY ═══ -->
+<div id="gallery"></div>
 <section class="gallery-section">
     <div class="ch-frame fade-in">
         <div class="ch-header">
@@ -502,6 +604,41 @@ const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Nav show/hide on scroll past hero
+const nav = document.getElementById('nav');
+const hero = document.querySelector('.hero');
+const heroObserver = new IntersectionObserver(entries => {
+    nav.classList.toggle('visible', !entries[0].isIntersecting);
+}, { threshold: 0.1 });
+heroObserver.observe(hero);
+
+// Active nav link tracking
+const sections = document.querySelectorAll('[id^="ch"], #video, #gallery');
+const navLinks = document.querySelectorAll('.nav-links a');
+const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+        }
+    });
+}, { threshold: 0.1, rootMargin: '-40% 0px -40% 0px' });
+sections.forEach(s => sectionObserver.observe(s));
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+    });
+});
 </script>
 
 </body>
