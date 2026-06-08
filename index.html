@@ -178,10 +178,7 @@
             position: fixed; top: 0; right: 0; left: 0; z-index: 900;
             background: rgba(245,240,232,0.92); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--gold);
-            transform: translateY(-100%);
-            transition: transform 0.4s ease;
         }
-        .nav.visible { transform: translateY(0); }
         .nav-inner {
             max-width: 900px; margin: 0 auto;
             display: flex; align-items: center; justify-content: space-between;
@@ -605,18 +602,7 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Nav show/hide — appear after scrolling 80px
 const nav = document.getElementById('nav');
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    if (y > 80) {
-        nav.classList.add('visible');
-    } else {
-        nav.classList.remove('visible');
-    }
-    lastScroll = y;
-}, { passive: true });
 
 // Active nav link tracking
 const sections = document.querySelectorAll('[id^="ch"], #video, #gallery');
