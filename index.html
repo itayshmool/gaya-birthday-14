@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הסיפור של גאיה - יום הולדת 14</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Heebo:wght@300;400;500;700&family=Secular+One&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --parchment: #f5f0e8;
+            --parchment-dark: #ebe4d6;
+            --parchment-darker: #ddd5c3;
+            --forest-green: #2d5016;
+            --burgundy: #7a1b3e;
+            --gold: #c4973b;
+            --gold-dark: #a07c2e;
+            --ink: #2c1810;
+            --ink-light: #4a3628;
+            --cream: #faf7f0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: var(--parchment);
+            color: var(--ink);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px;
+        }
+
+        .flourish { text-align: center; padding: 20px 0; color: var(--gold); font-size: 1.6rem; opacity: 0.7; letter-spacing: 8px; }
+        .flourish::before { content: '~ \2766 ~'; }
+
+        .divider { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 30px 0; opacity: 0.5; }
+        .divider .line { flex: 1; max-width: 120px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+        .divider .diamond { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: radial-gradient(ellipse at center, var(--cream) 0%, var(--parchment) 60%, var(--parchment-dark) 100%);
+            position: relative;
+        }
+
+        .book-cover {
+            background: linear-gradient(135deg, var(--parchment-dark) 0%, var(--cream) 50%, var(--parchment-dark) 100%);
+            border: 3px solid var(--gold);
+            border-radius: 8px;
+            padding: 60px 50px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 0 1px var(--gold-dark), 0 0 0 6px var(--parchment-dark), 0 0 0 7px var(--gold), 0 0 0 12px var(--parchment-dark), 0 0 0 13px var(--gold-dark), 0 20px 60px rgba(44,24,16,0.2);
+        }
+
+        .book-cover::before, .book-cover::after { content: '\2767'; position: absolute; font-size: 2rem; color: var(--gold); opacity: 0.6; }
+        .book-cover::before { top: 15px; right: 20px; }
+        .book-cover::after { bottom: 15px; left: 20px; transform: rotate(180deg); }
+
+        .corner { position: absolute; width: 40px; height: 40px; border-color: var(--gold); border-style: solid; opacity: 0.5; }
+        .corner-tl { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
+        .corner-tr { top: 20px; left: 20px; border-width: 2px 0 0 2px; }
+        .corner-bl { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
+        .corner-br { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
+
+        .hero-subtitle { font-weight: 300; font-size: 1rem; color: var(--gold-dark); letter-spacing: 4px; margin-bottom: 20px; }
+        .hero-title { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(3rem,8vw,5.5rem); color: var(--burgundy); line-height: 1.1; margin-bottom: 10px; }
+        .hero-name { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(4rem,12vw,8rem); color: var(--forest-green); line-height: 1; margin-bottom: 20px; }
+        .hero-dates { font-family: 'Secular One', sans-serif; font-size: 1.1rem; color: var(--gold); letter-spacing: 3px; }
+        .hero-scroll { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-weight: 300; font-size: 0.85rem; color: var(--gold-dark); opacity: 0.6; animation: bob 2s ease-in-out infinite; }
+        @keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+        /* ── CHAPTERS ── */
+        .ch-wrap:nth-child(odd) { background: var(--parchment); }
+        .ch-wrap:nth-child(even) { background: var(--cream); }
+
+        .chapter { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
+
+        .ch-frame {
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            padding: 40px 35px;
+            position: relative;
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 4px 20px rgba(44,24,16,0.06);
+        }
+        .ch-frame::before { content: ''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 1px solid var(--gold); border-radius: 2px; opacity: 0.4; pointer-events: none; }
+
+        .ch-header { text-align: center; margin-bottom: 35px; }
+        .ch-num { font-family: 'Secular One', sans-serif; font-size: 0.9rem; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px; }
+        .ch-title { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(2rem,5vw,3.2rem); color: var(--burgundy); line-height: 1.2; margin-bottom: 5px; }
+        .ch-age { font-family: 'Secular One', sans-serif; font-size: 2.5rem; color: var(--forest-green); opacity: 0.15; margin-top: -5px; }
+
+        .narrative { font-weight: 300; font-size: 1.1rem; line-height: 2; color: var(--ink-light); text-align: center; margin-bottom: 30px; max-width: 580px; margin-left: auto; margin-right: auto; }
+        .drop-cap { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 2.5rem; color: var(--burgundy); line-height: 1; float: right; margin-left: 8px; margin-top: 4px; }
+
+        /* ── PHOTOS ── */
+        .photos { display: flex; flex-direction: column; align-items: center; gap: 25px; }
+        .photo-pair { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .photo-trio { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+        .pf { position: relative; display: inline-block; max-width: 100%; }
+        .pf img {
+            display: block; width: 100%; max-width: 460px; border-radius: 8px;
+            border: 4px solid var(--parchment-darker);
+            box-shadow: 0 2px 0 var(--gold), 0 4px 0 var(--parchment-darker), 0 8px 30px rgba(44,24,16,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .pf:hover img { transform: scale(1.01); box-shadow: 0 2px 0 var(--gold), 0 4px 0 var(--parchment-darker), 0 12px 40px rgba(44,24,16,0.2); }
+        .photo-pair .pf img, .photo-trio .pf img { max-width: 320px; }
+        .photo-trio .pf img { max-width: 220px; }
+        .orn { position: absolute; font-size: 1.2rem; color: var(--gold); opacity: 0.5; }
+        .orn.tr { top: -12px; right: -5px; } .orn.tl { top: -12px; left: -5px; }
+        .orn.br { bottom: -12px; right: -5px; } .orn.bl { bottom: -12px; left: -5px; }
+        .caption { font-weight: 300; font-size: 0.9rem; color: var(--ink-light); text-align: center; font-style: italic; margin-top: 12px; opacity: 0.75; }
+
+        /* ── VIDEO ── */
+        .video-ch { padding: 80px 20px; text-align: center; background: linear-gradient(180deg, var(--parchment-dark) 0%, var(--parchment) 50%, var(--parchment-dark) 100%); }
+        .video-ch video { width: 100%; max-width: 700px; border-radius: 8px; border: 4px solid var(--parchment-darker); box-shadow: 0 2px 0 var(--gold), 0 4px 0 var(--parchment-darker), 0 12px 40px rgba(44,24,16,0.2); }
+
+        /* ── REAL PHOTOS GALLERY ── */
+        .gallery-section { padding: 60px 20px; background: var(--parchment-dark); }
+        .gallery-section .ch-frame { max-width: 900px; margin: 0 auto; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
+        .gallery-grid img {
+            width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px;
+            border: 3px solid var(--parchment-darker);
+            box-shadow: 0 4px 15px rgba(44,24,16,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .gallery-grid img:hover { transform: scale(1.03); box-shadow: 0 8px 25px rgba(44,24,16,0.18); }
+        .gallery-year { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: 1.8rem; color: var(--burgundy); margin-top: 25px; margin-bottom: 10px; text-align: center; }
+        .gallery-year:first-of-type { margin-top: 0; }
+
+        /* ── FINALE ── */
+        .finale {
+            min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 80px 20px;
+            background: radial-gradient(ellipse at center, var(--cream) 0%, var(--parchment) 70%);
+        }
+        .finale-text { font-family: 'Amatic SC', cursive; font-weight: 700; font-size: clamp(2rem,6vw,3.5rem); color: var(--forest-green); line-height: 1.4; margin-bottom: 20px; }
+        .finale-heart { font-size: 2rem; color: var(--burgundy); opacity: 0.6; margin-top: 20px; animation: heartbeat 2s ease-in-out infinite; }
+        @keyframes heartbeat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.15); } 30% { transform: scale(1); } 45% { transform: scale(1.1); } }
+        .finale-sub { font-weight: 300; font-size: 1rem; color: var(--gold-dark); margin-top: 15px; }
+
+        /* ── LIGHTBOX ── */
+        .lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(44,24,16,0.92); display: none; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(8px); }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 8px; border: 4px solid var(--parchment-darker); box-shadow: 0 20px 80px rgba(0,0,0,0.5); }
+
+        /* ── ANIMATIONS ── */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .book-cover { padding: 40px 25px; }
+            .ch-frame { padding: 30px 20px; }
+            .ch-frame::before { top: 4px; left: 4px; right: 4px; bottom: 4px; }
+            .photo-pair, .photo-trio { flex-direction: column; align-items: center; }
+            .photo-pair .pf img, .photo-trio .pf img { max-width: 100%; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+    <div class="book-cover fade-in">
+        <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+        <div style="font-size:3rem;margin-bottom:25px;opacity:0.6">&#128214;</div>
+        <div class="hero-subtitle">היו היה...</div>
+        <h1 class="hero-title">הסיפור של</h1>
+        <div class="hero-name">גאיה</div>
+        <div class="flourish"></div>
+        <div class="hero-dates">08.06.2012 &mdash; 08.06.2026</div>
+    </div>
+    <div class="hero-scroll">הפכו דף <span style="display:block;font-size:1.2rem;margin-top:4px">&darr;</span></div>
+</section>
+
+<!-- ═══ CHAPTER 1: NEWBORN ═══ -->
+<div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
+    <div class="ch-header">
+        <div class="ch-num">&mdash; פרק א׳ &mdash;</div>
+        <h2 class="ch-title">היום שבו הכל התחיל</h2>
+        <div class="ch-age">0</div>
+    </div>
+    <p class="narrative"><span class="drop-cap">ב</span>יום קיץ חם, בשמיני ביוני, הגיעה לעולם ילדה קטנה עם עיניים גדולות ומבט שכבש את כולם מהרגע הראשון. אף אחד עוד לא ידע איזה סיפור מדהים עומד להתחיל.</p>
+    <div class="photos">
+        <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/001_age00_2012_newborn.jpg" alt="גאיה נולדת"></div>
+        <div class="caption">הפרק הראשון &mdash; הדף הריק שמתחיל להתמלא</div>
+    </div>
+</div></section></div>
+
+<div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+<!-- ═══ CHAPTER 2: BEACH BABY ═══ -->
+<div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
+    <div class="ch-header">
+        <div class="ch-num">&mdash; פרק ב׳ &mdash;</div>
+        <h2 class="ch-title">ימים של ים ושמש</h2>
+        <div class="ch-age">1</div>
+    </div>
+    <p class="narrative"><span class="drop-cap">ו</span>כמו בכל סיפור אגדה, הייתה שם אמא אוהבת. על חוף הים, עם רוח מלוחה ושמש זהובה, היא החזיקה את הנסיכה הקטנה וידעה שהעולם הפך ליפה יותר.</p>
+    <div class="photos">
+        <div class="photo-pair">
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/002_age01_2013_beach_kiss_with_mom.jpg" alt="נשיקה בחוף"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/003_age01_2013_beach_towel_with_mom.jpg" alt="עטופה במגבת"></div>
+        </div>
+        <div class="caption">נשיקות במגבת על חוף תל אביב &mdash; השקיעה, החיוך, והאהבה</div>
+    </div>
+</div></section></div>
+
+<div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+<!-- ═══ CHAPTER 3: DREAMING ═══ -->
+<div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
+    <div class="ch-header">
+        <div class="ch-num">&mdash; פרק ג׳ &mdash;</div>
+        <h2 class="ch-title">חולמת חלומות</h2>
+        <div class="ch-age">3</div>
+    </div>
+    <p class="narrative"><span class="drop-cap">ה</span>נסיכה הקטנה אהבה לחלום. היא הייתה שוכבת על השמיכה בפארק, מחבקת את הבובה האהובה, וחולמת על עולמות רחוקים. אולי על הרפתקאות, אולי על חיות קסומות.</p>
+    <div class="photos">
+        <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/004_age03_2015_dreaming_on_blanket.jpg" alt="חולמת"></div>
+        <div class="caption">כל חלום הוא עמוד חדש בספר</div>
+    </div>
+</div></section></div>
+
+<div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+<!-- ═══ CHAPTER 4: FAMILY ═══ -->
+<div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
+    <div class="ch-header">
+        <div class="ch-num">&mdash; פרק ד׳ &mdash;</div>
+        <h2 class="ch-title">משפחה זה הכל</h2>
+        <div class="ch-age">4</div>
+    </div>
+    <p class="narrative"><span class="drop-cap">ל</span>נסיכה שלנו היו אחיות, סבתא אוהבת, ואבא שהיה הגיבור של הסיפור. עם נשיקות בגינה, משחקים עם באווי, ורגעים עדינים — המשפחה הייתה הקסם הכי גדול.</p>
+    <div class="photos">
+        <div class="photo-pair">
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/005_age04_2016_three_sisters.jpg" alt="שלוש אחיות"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/006_age04_2016_playing_with_sister.jpg" alt="משחק עם באווי"></div>
+        </div>
+        <div class="photo-trio">
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/007_age04_2016_with_grandma_and_sister.jpg" alt="עם סבתא"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/008_age04_2016_dad_kiss_garden.jpg" alt="נשיקה מאבא"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/009_age04_2016_tender_moment_with_sister.jpg" alt="רגע עדין"></div>
+        </div>
+        <div class="caption">הדמויות הכי חשובות בסיפור &mdash; אחיות, סבתא, אבא, ואהבה בלי סוף</div>
+    </div>
+</div></section></div>
+
+<div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+<!-- ═══ CHAPTER 5: THAILAND ═══ -->
+<div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
+    <div class="ch-header">
+        <div class="ch-num">&mdash; פרק ה׳ &mdash;</div>
+        <h2 class="ch-title">ההרפתקה הגדולה בתאילנד</h2>
+        <div class="ch-age">5</div>
+    </div>
+    <p class="narrative"><span class="drop-cap">ו</span>אז הגיע הפרק של ההרפתקאות. הנסיכה יצאה למסע לארצות רחוקות, אכלה גלידה בן אנד ג׳ריס, שתתה שוקו עם שני קשים, פגשה נמרים, נסעה ברכבת בג׳ונגל, וגילתה פילים אמיתיים.</p>
+    <div class="photos">
+        <div class="photo-pair">
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/010_age05_2017_ben_jerrys_thailand.jpg" alt="בן אנד ג׳ריס"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/011_age05_2017_sharing_drink_with_sister.jpg" alt="שוקו משותף"></div>
+        </div>
+        <div class="photo-trio">
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/012_age05_2017_with_tiger_statues.jpg" alt="נמרים"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/013_age05_2017_three_sisters_on_train.jpg" alt="ברכבת"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/015_age05_2017_crafting_with_sister.jpg" alt="יצירה"></div>
+        </div>
+        <div class="pf" style="margin-top:10px"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/014_age05_2017_family_elephant_sanctuary.jpg" alt="שמורת הפילים"></div>
+        <div class="caption">כל המשפחה בכחול, עם הפילים מאחור &mdash; הפוסטר של הסיפור שלנו</div>
+    </div>
+</div></section></div>
+
+<div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+<!-- ═══ CHAPTER 6: GROWING ═══ -->
+<div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
+    <div class="ch-header">
+        <div class="ch-num">&mdash; פרק ו׳ &mdash;</div>
+        <h2 class="ch-title">גדלה ומגלה את העולם</h2>
+        <div class="ch-age">7</div>
+    </div>
+    <p class="narrative"><span class="drop-cap">ה</span>נסיכה גילתה שהעולם מלא בהפתעות. היא האכילה עיזים בחווה, טיילה עם אמא ליד מפלים, וגילתה שהרגעים הכי יפים הם הרגעים הכי פשוטים — על חוף הים עם אבא.</p>
+    <div class="photos">
+        <div class="photo-pair">
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/016_age07_2019_feeding_goats.jpg" alt="מאכילה עיזים"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/017_age07_2019_with_mom_at_farm.jpg" alt="עם אמא בחווה"></div>
+        </div>
+        <div class="photo-pair">
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/018_age07_2019_with_mom_waterfall.jpg" alt="ליד המפל"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/019_age07_2019_with_dad_beach.jpg" alt="עם אבא בחוף"></div>
+        </div>
+        <div class="caption">טבע, חיות, מפלים ואבא &mdash; הפרק שבו העולם נפתח</div>
+    </div>
+</div></section></div>
+
+<div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+<!-- ═══ CHAPTER 7: DAD MOMENTS ═══ -->
+<div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
+    <div class="ch-header">
+        <div class="ch-num">&mdash; פרק ז׳ &mdash;</div>
+        <h2 class="ch-title">רגעים של שקט עם אבא</h2>
+        <div class="ch-age">8-10</div>
+    </div>
+    <p class="narrative"><span class="drop-cap">ה</span>שנים חלפו, והנסיכה גדלה. אבל דבר אחד לא השתנה: הרגעים השקטים עם אבא. ריצה ליד הכנרת, שקיעה עם כוס חמה, ונשיקה על הראש. הרגעים הכי פשוטים הם הכי שווים.</p>
+    <div class="photos">
+        <div class="photo-pair">
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/020_age08_2020_running_by_lake_with_dad.jpg" alt="רצה ליד הכנרת"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/021_age10_2022_golden_hour_with_dad.jpg" alt="שעת הזהב"></div>
+        </div>
+        <div class="caption">יש רגעים ששווים אלף מילים &mdash; ואלה הם</div>
+    </div>
+</div></section></div>
+
+<div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+<!-- ═══ CHAPTER 8: YOUNG LADY ═══ -->
+<div class="ch-wrap"><section class="chapter"><div class="ch-frame fade-in">
+    <div class="ch-header">
+        <div class="ch-num">&mdash; פרק ח׳ &mdash;</div>
+        <h2 class="ch-title">הפרק שבו היא הפכה לנערה</h2>
+        <div class="ch-age">11-12</div>
+    </div>
+    <p class="narrative"><span class="drop-cap">ו</span>פתאום, כמעט בלי לשים לב, הנסיכה הקטנה הפכה לנערה. עם צחוק במפלים, בורקסים עם חברות, באבל טי ביד, וסטייל משלה. ובשקיעה עם אבא — היא עדיין הבת הקטנה שלו. תמיד תהיה.</p>
+    <div class="photos">
+        <div class="photo-pair">
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/022_age11_2023_laughing_in_waterfall.jpg" alt="צוחקת במפל"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/023_age12_2024_cafe_with_friend.jpg" alt="קפה עם חברה"></div>
+        </div>
+        <div class="photo-pair">
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/024_age12_2024_bubble_tea.jpg" alt="באבל טי"></div>
+            <div class="pf"><span class="orn tr">&loz;</span><span class="orn tl">&loz;</span><span class="orn br">&loz;</span><span class="orn bl">&loz;</span><img src="images/pixar/025_age12_2024_sunset_swim_with_dad.jpg" alt="שקיעה עם אבא"></div>
+        </div>
+        <div class="caption">נערה צעירה עם נשמה ישנה &mdash; וחיוך שמאיר את כל הסיפור</div>
+    </div>
+</div></section></div>
+
+<div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+<!-- ═══ VIDEO CHAPTER ═══ -->
+<section class="video-ch">
+    <div class="ch-frame fade-in" style="max-width:800px;margin:0 auto">
+        <div class="ch-header">
+            <div class="ch-num">&mdash; פרק מיוחד &mdash;</div>
+            <h2 class="ch-title">הסרט של גאיה</h2>
+        </div>
+        <p class="narrative">כל הפרקים, כל הדמויות, כל הרגעים &mdash; בסרטון אחד קסום. לחצו לצפות בסיפור כולו.</p>
+        <video controls playsinline poster="images/pixar/014_age05_2017_family_elephant_sanctuary.jpg">
+            <source src="gaya_14_pixar_crossfade.mp4" type="video/mp4">
+        </video>
+    </div>
+</section>
+
+<div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+<!-- ═══ REAL PHOTOS GALLERY ═══ -->
+<section class="gallery-section">
+    <div class="ch-frame fade-in">
+        <div class="ch-header">
+            <div class="ch-num">&mdash; נספח &mdash;</div>
+            <h2 class="ch-title">התמונות האמיתיות</h2>
+        </div>
+        <p class="narrative">מאחורי כל ציור קסום מסתתרת תמונה אמיתית. הנה הן, מסודרות לפי הגיל של גאיה.</p>
+
+        <div class="gallery-year">2012 &mdash; גיל 0</div>
+        <div class="gallery-grid">
+            <img src="images/web/IMG-20180608-WA0053.jpg" loading="lazy" alt="2012">
+        </div>
+
+        <div class="gallery-year">2013 &mdash; גיל 1</div>
+        <div class="gallery-grid">
+            <img src="images/web/tel_aviv_beach_2013_13.jpg" loading="lazy" alt="2013">
+            <img src="images/web/tel_aviv_beach_2013_6.jpg" loading="lazy" alt="2013">
+        </div>
+
+        <div class="gallery-year">2015 &mdash; גיל 3</div>
+        <div class="gallery-grid">
+            <img src="images/web/DSC_0777.JPG" loading="lazy" alt="2015">
+        </div>
+
+        <div class="gallery-year">2016 &mdash; גיל 4</div>
+        <div class="gallery-grid">
+            <img src="images/web/DSC_3247.JPG" loading="lazy" alt="2016">
+            <img src="images/web/DSC_3279.JPG" loading="lazy" alt="2016">
+            <img src="images/web/DSC_3373.JPG" loading="lazy" alt="2016">
+            <img src="images/web/DSC_3866.JPG" loading="lazy" alt="2016">
+            <img src="images/web/DSC_3888.JPG" loading="lazy" alt="2016">
+        </div>
+
+        <div class="gallery-year">2017 &mdash; גיל 5 (תאילנד)</div>
+        <div class="gallery-grid">
+            <img src="images/web/IMG-20170715-WA0032.jpg" loading="lazy" alt="2017">
+            <img src="images/web/DSC_4649.JPG" loading="lazy" alt="2017">
+            <img src="images/web/DSC_4713.JPG" loading="lazy" alt="2017">
+            <img src="images/web/DSC_4795.JPG" loading="lazy" alt="2017">
+            <img src="images/web/DSC_4826.JPG" loading="lazy" alt="2017">
+            <img src="images/web/DSC_4892.JPG" loading="lazy" alt="2017">
+        </div>
+
+        <div class="gallery-year">2019 &mdash; גיל 7</div>
+        <div class="gallery-grid">
+            <img src="images/web/DSC_8440.JPG" loading="lazy" alt="2019">
+            <img src="images/web/DSC_8449.JPG" loading="lazy" alt="2019">
+            <img src="images/web/DSC_8513.JPG" loading="lazy" alt="2019">
+            <img src="images/web/IMG-20191007-WA0044.jpg" loading="lazy" alt="2019">
+        </div>
+
+        <div class="gallery-year">2020 &mdash; גיל 8</div>
+        <div class="gallery-grid">
+            <img src="images/web/IMG-20201213-WA0008.jpg" loading="lazy" alt="2020">
+        </div>
+
+        <div class="gallery-year">2022 &mdash; גיל 10</div>
+        <div class="gallery-grid">
+            <img src="images/web/IMG-20221105-WA0030.jpg" loading="lazy" alt="2022">
+        </div>
+
+        <div class="gallery-year">2023 &mdash; גיל 11</div>
+        <div class="gallery-grid">
+            <img src="images/web/IMG-20230513-WA0014.jpg" loading="lazy" alt="2023">
+        </div>
+
+        <div class="gallery-year">2024 &mdash; גיל 12</div>
+        <div class="gallery-grid">
+            <img src="images/web/IMG-20240616-WA0034.jpg" loading="lazy" alt="2024">
+            <img src="images/web/IMG-20240627-WA0034.jpg" loading="lazy" alt="2024">
+            <img src="images/web/IMG-20240820-WA0031.jpg" loading="lazy" alt="2024">
+        </div>
+    </div>
+</section>
+
+<div class="divider"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+
+<!-- ═══ FINALE ═══ -->
+<section class="finale">
+    <div class="fade-in">
+        <div class="flourish"></div>
+        <br>
+        <div class="finale-text">והסיפור עוד לא נגמר...</div>
+        <p class="narrative" style="margin-top:10px">
+            כי הפרקים הכי יפים עוד מחכים להיכתב.<br>
+            יום הולדת שמח, גאיה היקרה.<br>
+            שפרק 14 יהיה מלא קסם, הרפתקאות ואהבה.
+        </p>
+        <div class="finale-heart">&hearts;</div>
+        <div class="finale-sub">באהבה אינסופית, מאבא</div>
+        <br>
+        <div class="flourish"></div>
+    </div>
+</section>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox" id="lightbox"><img id="lb-img" src="" alt=""></div>
+
+<script>
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+
+document.querySelectorAll('.pf img, .gallery-grid img').forEach(img => {
+    img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lb.classList.add('active');
+    });
+});
+lb.addEventListener('click', () => lb.classList.remove('active'));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('active'); });
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
